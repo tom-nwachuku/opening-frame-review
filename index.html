@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Opening Frame, a private working review.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Opening Frame — Private review</title>
+  <style>
+    :root{--ink:#0d171a;--paper:#ece9e2;--cream:#f6f2ea;--green:#b9e5a4;--muted:#a5aaa6;--line:rgba(245,247,237,.22)}
+    *{box-sizing:border-box}
+    html{height:100%;scroll-behavior:smooth}
+    body{margin:0;min-height:100%;background:var(--ink);color:var(--cream);font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    :focus-visible{outline:2px solid var(--green);outline-offset:4px}
+    .gate{min-height:100dvh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+    .gate:before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 85% 63%,rgba(73,126,108,.26),transparent 29%),radial-gradient(circle at 35% 0%,rgba(151,105,63,.14),transparent 42%);pointer-events:none}
+    .top{z-index:1;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:27px clamp(24px,5.6vw,88px);border-bottom:1px solid var(--line)}
+    .logo{font-weight:900;letter-spacing:-.07em;font-size:18px;white-space:nowrap}.logo span{font-weight:300;letter-spacing:-.075em}
+    .topright{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#b4beb4;text-align:right}
+    .body{z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(350px,.95fr);width:100%;max-width:1700px;margin:auto;align-items:center;gap:clamp(25px,6vw,110px);padding:60px clamp(24px,5.6vw,88px) 70px}
+    .copy{max-width:790px}
+    .eyebrow{display:flex;align-items:center;gap:13px;text-transform:uppercase;letter-spacing:.24em;color:var(--green);font-weight:700;font-size:10px;margin:0 0 34px}
+    .eyebrow:before{content:"";display:block;width:30px;height:1px;background:currentColor}
+    h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.067em;line-height:.96;font-size:clamp(60px,7.8vw,132px);margin:0 0 29px}
+    h1 em{font-weight:400;color:var(--green)}
+    .intro{font-size:clamp(16px,1.7vw,21px);line-height:1.55;color:#c5ccc6;max-width:575px;margin:0 0 43px}
+    .access{max-width:540px;border-top:1px solid var(--line);padding-top:26px}
+    .access label{display:block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:13px;color:#d6ddd5}
+    .access-row{display:flex;gap:9px}
+    .access input{min-width:0;flex:1;border:1px solid #728179;background:#f7f5ef;color:#101915;border-radius:0;padding:15px 17px;height:55px;font-size:17px;outline:none}
+    .access input::placeholder{color:#7d887f}
+    .access input:focus{box-shadow:0 0 0 3px rgba(185,229,164,.23)}
+    .access button{border:1px solid var(--green);background:var(--green);color:#142a20;min-width:142px;font-weight:700;padding:0 22px;transition:background .18s,transform .18s}
+    .access button:hover{background:#d0efc1;transform:translateY(-1px)}
+    .access button:disabled{opacity:.7;transform:none;cursor:wait}
+    .hint{min-height:21px;margin:12px 0 0;color:#abb5ac;font-size:12px;line-height:1.5}
+    .hint.error{color:#ffb5a8}
+    .graphic{position:relative;min-height:535px;display:flex;align-items:center;justify-content:center;perspective:900px}
+    .graphic:before{content:"";position:absolute;width:85%;aspect-ratio:1;border:1px solid rgba(202,226,201,.12);border-radius:50%;box-shadow:0 0 0 75px rgba(202,226,201,.025),0 0 0 150px rgba(202,226,201,.018)}
+    .poster{width:min(42%,215px);height:390px;max-height:58vw;min-height:305px;border:1px solid #618072;position:absolute;overflow:hidden;box-shadow:0 34px 65px #02090988}
+    .poster:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 47% 28%,#718d75 0%,#223b3a 37%,#101919 80%)}
+    .poster:after{content:"";position:absolute;width:175%;height:47%;left:-42%;bottom:-18%;border-radius:50%;border:30px solid rgba(159,210,172,.13);transform:rotate(-23deg)}
+    .poster.one{transform:translateX(-113px) translateY(35px) rotate(-12deg);opacity:.6}
+    .poster.two{transform:translateX(112px) translateY(29px) rotate(11deg);opacity:.72}
+    .poster.three{transform:translateY(-10px);background:#132326;z-index:2}
+    .poster .postertext{position:absolute;z-index:3;inset:0;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+    .poster small{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#d9ece0}
+    .poster strong{font-family:Georgia,serif;font-size:clamp(27px,3vw,46px);line-height:.99;letter-spacing:-.055em;font-weight:400}
+    .graphic .issue{position:absolute;right:0;bottom:22px;border-top:1px solid #62736b;color:#bfcac0;padding-top:12px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;line-height:1.8}
+    .bottom{z-index:1;display:flex;justify-content:space-between;gap:24px;padding:20px clamp(24px,5.6vw,88px);border-top:1px solid var(--line);color:#aeb8ad;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+    .viewer{display:none;height:100dvh;flex-direction:column;background:#ece9e2;color:#14201d}
+    .viewer-head{height:55px;flex:none;background:#101b1d;color:#f0f2e8;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(16px,3vw,40px)}
+    .viewer-head .logo{font-size:15px}
+    .viewer-nav{display:flex;align-items:center;gap:5px}
+    .viewer-nav button{border:1px solid transparent;background:transparent;color:#c8d0c9;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:10px 12px}
+    .viewer-nav button:hover,.viewer-nav button.active{border-color:#627368;color:white}
+    .viewer-nav .lock{margin-left:7px;color:#b2dca8}
+    .viewer iframe{width:100%;height:calc(100dvh - 55px);border:0;background:#edeae4}
+    [hidden]{display:none!important}
+    @media(max-width:900px){.body{grid-template-columns:1fr;gap:30px}.graphic{min-height:300px;order:-1}.poster{height:275px;min-height:0;width:170px}.poster.one{transform:translateX(-82px) translateY(14px) rotate(-12deg)}.poster.two{transform:translateX(82px) translateY(14px) rotate(11deg)}.poster.three{transform:translateY(-8px)}.poster strong{font-size:33px}.graphic .issue{display:none}h1{font-size:clamp(60px,10vw,95px)}}
+    @media(max-width:600px){.top{padding:19px 22px}.topright{font-size:8px;max-width:150px}.body{padding:34px 22px 48px;gap:23px}.graphic{min-height:238px}.poster{height:215px;width:128px}.poster.one{transform:translateX(-60px) translateY(11px) rotate(-12deg)}.poster.two{transform:translateX(60px) translateY(11px) rotate(11deg)}.poster .postertext{padding:13px}.poster strong{font-size:26px}.poster small{font-size:7px}.eyebrow{margin-bottom:20px}h1{font-size:clamp(53px,13vw,78px);margin-bottom:18px}.intro{margin-bottom:27px;font-size:16px}.access-row{flex-direction:column}.access button{height:52px}.bottom{padding:16px 22px;flex-direction:column;gap:6px;font-size:9px}.viewer-head{height:auto;min-height:55px;flex-wrap:wrap;padding:9px 15px}.viewer-nav{gap:0;flex-wrap:wrap}.viewer-nav button{font-size:9px;padding:8px}.viewer iframe{height:calc(100dvh - 86px)}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="gate" id="gate">
+    <header class="top"><div class="logo">OPENING<span>FRAME</span></div><div class="topright">A private working review<br>September 2026</div></header>
+    <div class="body">
+      <div class="copy">
+        <p class="eyebrow">An invitation to the next chapter</p>
+        <h1>See what<br>we <em>could build.</em></h1>
+        <p class="intro">A working strategy, a map of the market, and the questions that matter before the first frame is shot.</p>
+        <form class="access" id="access-form">
+          <label for="access-word">Your access word</label>
+          <div class="access-row"><input id="access-word" name="access-word" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter access word" required><button type="submit" id="open-button">Enter the review <span aria-hidden="true">↗</span></button></div>
+          <p class="hint" id="status" role="status" aria-live="polite">Shared privately with invited readers.</p>
+        </form>
+      </div>
+      <div class="graphic" aria-hidden="true"><div class="poster one"><div class="postertext"><small>Original series / concept</small><strong>Two sides.<br>One season.</strong><small>03 / 12</small></div></div><div class="poster two"><div class="postertext"><small>Athlete stories / concept</small><strong>After the<br>buzzer.</strong><small>02 / 12</small></div></div><div class="poster three"><div class="postertext"><small>Opening Frame / concept</small><strong>Who leaked<br>the offer?</strong><small>01 / 12</small></div></div><div class="issue">A strategy and research edition<br>Prepared for conversation</div></div>
+    </div>
+    <footer class="bottom"><span>Opening Frame / Working concept</span><span>For invited review and response</span></footer>
+  </main>
+  <main class="viewer" id="viewer" aria-label="Unlocked review"><header class="viewer-head"><div class="logo">OPENING<span>FRAME</span></div><nav class="viewer-nav" aria-label="Review pages"><button type="button" data-page="strategy" class="active">Strategy</button><button type="button" data-page="atlas">Research atlas</button><button type="button" id="document-button" hidden>Conversation PDF ↓</button><button type="button" class="lock" id="lock-button">Lock ↗</button></nav></header><iframe id="stage" title="Opening Frame review" referrerpolicy="no-referrer"></iframe></main>
+  <script>
+    (() => {
+      const form = document.getElementById('access-form');
+      const input = document.getElementById('access-word');
+      const button = document.getElementById('open-button');
+      const status = document.getElementById('status');
+      const gate = document.getElementById('gate');
+      const viewer = document.getElementById('viewer');
+      const stage = document.getElementById('stage');
+      const docButton = document.getElementById('document-button');
+      let bundle = null;
+      let pendingHash = '';
+
+      const fromBase64 = value => Uint8Array.from(atob(value), character => character.charCodeAt(0));
+      async function tryOpen(word, vault) {
+        const encoded = new TextEncoder().encode(word);
+        for (const record of vault.records) {
+          try {
+            const material = await crypto.subtle.importKey('raw', encoded, 'PBKDF2', false, ['deriveKey']);
+            const key = await crypto.subtle.deriveKey({name:'PBKDF2',salt:fromBase64(record.salt),iterations:vault.iterations,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,['decrypt']);
+            const bytes = await crypto.subtle.decrypt({name:'AES-GCM',iv:fromBase64(record.iv)},key,fromBase64(record.data));
+            const result = JSON.parse(new TextDecoder().decode(bytes));
+            if (result.version === 1 && result.pages?.strategy && result.pages?.atlas) return result;
+          } catch (_) { /* generic failure avoids revealing which record was tried */ }
+        }
+        return null;
+      }
+      function showPage(page, hash = '') {
+        if (!bundle || !bundle.pages[page]) return;
+        pendingHash = hash;
+        stage.srcdoc = bundle.pages[page];
+        document.querySelectorAll('[data-page]').forEach(item => item.classList.toggle('active', item.dataset.page === page));
+      }
+      stage.addEventListener('load', () => {
+        const doc = stage.contentDocument;
+        if (!doc) return;
+        doc.addEventListener('click', event => {
+          const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
+          const match = /^(index|evidence)\.html(?:#(.+))?$/.exec(anchor?.getAttribute('href') || '');
+          if (!match) return;
+          event.preventDefault();
+          showPage(match[1] === 'index' ? 'strategy' : 'atlas', match[2] || '');
+        }, true);
+        if (pendingHash) {
+          doc.getElementById(decodeURIComponent(pendingHash))?.scrollIntoView();
+          pendingHash = '';
+        }
+      });
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        const word = input.value;
+        if (!word) return;
+        button.disabled = true;
+        status.classList.remove('error');
+        status.textContent = 'Opening the private review…';
+        try {
+          const response = await fetch('vault.json', {cache:'no-store'});
+          if (!response.ok) throw new Error('Vault unavailable');
+          bundle = await tryOpen(word, await response.json());
+          if (!bundle) {
+            status.textContent = 'That word did not open the review. Please try again.';
+            status.classList.add('error');
+            input.select();
+            return;
+          }
+          input.value = '';
+          gate.hidden = true;
+          viewer.style.display = 'flex';
+          docButton.hidden = !(bundle.documents && bundle.documents.length);
+          showPage('strategy');
+        } catch (_) {
+          status.textContent = 'The review is temporarily unavailable. Please try again.';
+          status.classList.add('error');
+        } finally { button.disabled = false; }
+      });
+      document.querySelectorAll('[data-page]').forEach(item => item.addEventListener('click', () => showPage(item.dataset.page)));
+      docButton.addEventListener('click', () => {
+        const documentFile = bundle?.documents?.[0];
+        if (!documentFile) return;
+        const bytes = fromBase64(documentFile.base64);
+        const url = URL.createObjectURL(new Blob([bytes], {type:documentFile.mime}));
+        const link = document.createElement('a');
+        link.href = url; link.download = documentFile.filename;
+        document.body.appendChild(link); link.click(); link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      });
+      document.getElementById('lock-button').addEventListener('click', () => {
+        stage.srcdoc = ''; bundle = null;
+        viewer.style.display = 'none'; gate.hidden = false;
+        status.classList.remove('error'); status.textContent = 'Shared privately with invited readers.';
+        input.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

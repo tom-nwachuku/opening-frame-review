@@ -120,17 +120,15 @@
       stage.addEventListener('load', () => {
         const doc = stage.contentDocument;
         if (!doc) return;
-        doc.addEventListener('click', event => {
-          const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
-          const match = /^(index|evidence)\.html(?:#(.+))?$/.exec(anchor?.getAttribute('href') || '');
-          if (!match) return;
-          event.preventDefault();
-          showPage(match[1] === 'index' ? 'strategy' : 'atlas', match[2] || '');
-        }, true);
         if (pendingHash) {
           doc.getElementById(decodeURIComponent(pendingHash))?.scrollIntoView();
           pendingHash = '';
         }
+      });
+      window.addEventListener('message', event => {
+        if (event.source !== stage.contentWindow || event.data?.type !== 'opening-frame-navigation') return;
+        if (event.data.page !== 'strategy' && event.data.page !== 'atlas') return;
+        showPage(event.data.page, event.data.hash || '');
       });
       form.addEventListener('submit', async event => {
         event.preventDefault();

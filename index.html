@@ -58,10 +58,10 @@
     .viewer-nav button{border:1px solid transparent;background:transparent;color:#c8d0c9;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:10px 12px}
     .viewer-nav button:hover,.viewer-nav button.active{border-color:#627368;color:white}
     .viewer-nav .lock{margin-left:7px;color:#b2dca8}
-    .viewer iframe{width:100%;height:calc(100dvh - 55px);border:0;background:#edeae4}
+    .viewer .stage{width:100%;height:calc(100dvh - 55px);overflow:auto;background:#edeae4;scroll-behavior:smooth}
     [hidden]{display:none!important}
     @media(max-width:900px){.body{grid-template-columns:1fr;gap:30px}.graphic{min-height:300px;order:-1}.poster{height:275px;min-height:0;width:170px}.poster.one{transform:translateX(-82px) translateY(14px) rotate(-12deg)}.poster.two{transform:translateX(82px) translateY(14px) rotate(11deg)}.poster.three{transform:translateY(-8px)}.poster strong{font-size:33px}.graphic .issue{display:none}h1{font-size:clamp(60px,10vw,95px)}}
-    @media(max-width:600px){.top{padding:19px 22px}.topright{font-size:8px;max-width:150px}.body{padding:34px 22px 48px;gap:23px}.graphic{min-height:238px}.poster{height:215px;width:128px}.poster.one{transform:translateX(-60px) translateY(11px) rotate(-12deg)}.poster.two{transform:translateX(60px) translateY(11px) rotate(11deg)}.poster .postertext{padding:13px}.poster strong{font-size:26px}.poster small{font-size:7px}.eyebrow{margin-bottom:20px}h1{font-size:clamp(53px,13vw,78px);margin-bottom:18px}.intro{margin-bottom:27px;font-size:16px}.access-row{flex-direction:column}.access button{height:52px}.bottom{padding:16px 22px;flex-direction:column;gap:6px;font-size:9px}.viewer-head{height:auto;min-height:55px;flex-wrap:wrap;padding:9px 15px}.viewer-nav{gap:0;flex-wrap:wrap}.viewer-nav button{font-size:9px;padding:8px}.viewer iframe{height:calc(100dvh - 86px)}}
+    @media(max-width:600px){.top{padding:19px 22px}.topright{font-size:8px;max-width:150px}.body{padding:34px 22px 48px;gap:23px}.graphic{min-height:238px}.poster{height:215px;width:128px}.poster.one{transform:translateX(-60px) translateY(11px) rotate(-12deg)}.poster.two{transform:translateX(60px) translateY(11px) rotate(11deg)}.poster .postertext{padding:13px}.poster strong{font-size:26px}.poster small{font-size:7px}.eyebrow{margin-bottom:20px}h1{font-size:clamp(53px,13vw,78px);margin-bottom:18px}.intro{margin-bottom:27px;font-size:16px}.access-row{flex-direction:column}.access button{height:52px}.bottom{padding:16px 22px;flex-direction:column;gap:6px;font-size:9px}.viewer-head{height:auto;min-height:55px;flex-wrap:wrap;padding:9px 15px}.viewer-nav{gap:0;flex-wrap:wrap}.viewer-nav button{font-size:9px;padding:8px}.viewer .stage{height:calc(100dvh - 86px)}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -83,7 +83,7 @@
     </div>
     <footer class="bottom"><span>Opening Frame / Working concept</span><span>For invited review and response</span></footer>
   </main>
-  <main class="viewer" id="viewer" aria-label="Unlocked review"><header class="viewer-head"><div class="logo">OPENING<span>FRAME</span></div><nav class="viewer-nav" aria-label="Review pages"><button type="button" data-page="strategy" class="active">Strategy</button><button type="button" data-page="atlas">Research atlas</button><button type="button" id="document-button" hidden>Conversation PDF ↓</button><button type="button" class="lock" id="lock-button">Lock ↗</button></nav></header><iframe id="stage" title="Opening Frame review" referrerpolicy="no-referrer"></iframe></main>
+  <main class="viewer" id="viewer" aria-label="Unlocked review"><header class="viewer-head"><div class="logo">OPENING<span>FRAME</span></div><nav class="viewer-nav" aria-label="Review pages"><button type="button" data-page="strategy" class="active">Strategy</button><button type="button" data-page="atlas">Research atlas</button><button type="button" id="document-button" hidden>Conversation PDF ↓</button><button type="button" class="lock" id="lock-button">Lock ↗</button></nav></header><div class="stage" id="stage" role="region" aria-label="Opening Frame review content"></div></main>
   <script>
     (() => {
       const form = document.getElementById('access-form');
@@ -95,7 +95,7 @@
       const stage = document.getElementById('stage');
       const docButton = document.getElementById('document-button');
       let bundle = null;
-      let pendingHash = '';
+      let activeStyles = [];
 
       const fromBase64 = value => Uint8Array.from(atob(value), character => character.charCodeAt(0));
       async function tryOpen(word, vault) {
@@ -113,23 +113,45 @@
       }
       function showPage(page, hash = '') {
         if (!bundle || !bundle.pages[page]) return;
-        pendingHash = hash;
-        stage.srcdoc = bundle.pages[page];
+        const parsed = new DOMParser().parseFromString(bundle.pages[page], 'text/html');
+        const scripts = [...parsed.querySelectorAll('script')]
+          .map(node => node.textContent)
+          .filter(text => text && !text.includes('opening-frame-navigation'));
+        parsed.querySelectorAll('script').forEach(node => node.remove());
+        activeStyles.forEach(node => node.remove());
+        activeStyles = [...parsed.querySelectorAll('style')].map(node => {
+          const style = document.createElement('style');
+          style.textContent = node.textContent;
+          document.head.appendChild(style);
+          return style;
+        });
+        stage.innerHTML = parsed.body.innerHTML;
+        stage.scrollTop = 0;
+        scripts.forEach(source => {
+          const script = document.createElement('script');
+          script.textContent = `(() => { ${source} })();`;
+          document.body.appendChild(script);
+          script.remove();
+        });
         document.querySelectorAll('[data-page]').forEach(item => item.classList.toggle('active', item.dataset.page === page));
+        if (hash) stage.querySelector(`#${CSS.escape(decodeURIComponent(hash))}`)?.scrollIntoView();
       }
-      stage.addEventListener('load', () => {
-        const doc = stage.contentDocument;
-        if (!doc) return;
-        if (pendingHash) {
-          doc.getElementById(decodeURIComponent(pendingHash))?.scrollIntoView();
-          pendingHash = '';
+      stage.addEventListener('click', event => {
+        const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
+        if (!anchor) return;
+        if (anchor.dataset.openingPage === 'strategy' || anchor.dataset.openingPage === 'atlas') {
+          event.preventDefault();
+          showPage(anchor.dataset.openingPage, anchor.dataset.openingHash || '');
+          return;
         }
-      });
-      window.addEventListener('message', event => {
-        if (event.source !== stage.contentWindow || event.data?.type !== 'opening-frame-navigation') return;
-        if (event.data.page !== 'strategy' && event.data.page !== 'atlas') return;
-        showPage(event.data.page, event.data.hash || '');
-      });
+        const href = anchor.getAttribute('href') || '';
+        if (href.startsWith('#')) {
+          event.preventDefault();
+          const id = decodeURIComponent(href.slice(1));
+          if (!id) { stage.scrollTo({top:0,behavior:'smooth'}); return; }
+          stage.querySelector(`#${CSS.escape(id)}`)?.scrollIntoView({behavior:'smooth'});
+        }
+      }, true);
       form.addEventListener('submit', async event => {
         event.preventDefault();
         const word = input.value;
@@ -169,7 +191,9 @@
         setTimeout(() => URL.revokeObjectURL(url), 2000);
       });
       document.getElementById('lock-button').addEventListener('click', () => {
-        stage.srcdoc = ''; bundle = null;
+        stage.replaceChildren();
+        activeStyles.forEach(node => node.remove()); activeStyles = [];
+        bundle = null;
         viewer.style.display = 'none'; gate.hidden = false;
         status.classList.remove('error'); status.textContent = 'Shared privately with invited readers.';
         input.focus();

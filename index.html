@@ -40,16 +40,21 @@
     .hint.error{color:#ffb5a8}
     .graphic{position:relative;min-height:535px;display:flex;align-items:center;justify-content:center;perspective:900px}
     .graphic:before{content:"";position:absolute;width:85%;aspect-ratio:1;border:1px solid rgba(202,226,201,.12);border-radius:50%;box-shadow:0 0 0 75px rgba(202,226,201,.025),0 0 0 150px rgba(202,226,201,.018)}
-    .poster{width:min(42%,215px);height:390px;max-height:58vw;min-height:305px;border:1px solid #618072;position:absolute;overflow:hidden;box-shadow:0 34px 65px #02090988}
+    .poster{width:min(45%,250px);aspect-ratio:2/3;max-height:58vw;min-height:305px;border:1px solid #618072;position:absolute;overflow:hidden;box-shadow:0 34px 65px #02090988;padding:0;background:#10181d;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .55s,filter .55s}
     .poster img{display:block;width:100%;height:100%;object-fit:cover}
-    .poster:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,14,15,.6),transparent 38%,rgba(7,14,15,.87))}
-    .poster.one{transform:translateX(-113px) translateY(35px) rotate(-12deg);opacity:.6}
-    .poster.two{transform:translateX(112px) translateY(29px) rotate(11deg);opacity:.72}
-    .poster.three{transform:translateY(-10px);z-index:2}
-    .poster .postertext{position:absolute;z-index:3;inset:0;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
-    .poster small{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#d9ece0}
-    .poster strong{font-family:Georgia,serif;font-size:clamp(27px,3vw,46px);line-height:.99;letter-spacing:-.055em;font-weight:400}
-    .graphic .issue{position:absolute;right:0;bottom:22px;border-top:1px solid #62736b;color:#bfcac0;padding-top:12px;font-size:9px;letter-spacing:.15em;text-transform:uppercase;line-height:1.8}
+    .poster[data-position="center"]{transform:translateY(-9px) translateZ(95px) rotateY(-2deg);z-index:4;opacity:1}
+    .poster[data-position="left"]{transform:translateX(-112px) translateY(29px) translateZ(-105px) rotateY(23deg);z-index:2;opacity:.8;filter:saturate(.85)}
+    .poster[data-position="right"]{transform:translateX(112px) translateY(29px) translateZ(-105px) rotateY(-23deg);z-index:3;opacity:.8;filter:saturate(.85)}
+    .poster[data-position="far"]{transform:translateY(14px) translateZ(-230px);z-index:1;opacity:.3}
+    .poster[data-position="center"]:hover{box-shadow:0 38px 70px #020909aa,0 0 0 3px var(--green)}
+    .graphic .issue{position:absolute;right:0;bottom:14px;border-top:1px solid #62736b;color:#cbdacf;padding-top:12px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;line-height:1.8;text-align:right}
+    .graphic .issue strong{display:block;color:#fff;font-size:13px;letter-spacing:.04em;text-transform:none}
+    .preview-link{display:inline-block;color:var(--green);font-size:12px;font-weight:700;letter-spacing:.08em;text-decoration:none;border-bottom:1px solid #7ca672;padding-bottom:4px;margin-top:22px}
+    .preview{z-index:1;display:grid;grid-template-columns:minmax(0,.9fr) minmax(270px,.65fr);align-items:center;gap:clamp(35px,8vw,120px);padding:clamp(60px,8vw,120px) clamp(24px,8vw,130px);border-top:1px solid var(--line);background:#101f28;min-height:700px}
+    .preview-video{max-width:390px;width:100%;justify-self:center;position:relative}
+    .preview-video:before{content:"";position:absolute;inset:6% -6%;background:#aecfa725;filter:blur(50px);z-index:0}
+    .preview-video video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;position:relative;border:1px solid #9fb6a5;box-shadow:0 35px 65px #01090fc2}
+    .preview-copy{max-width:520px}.preview-copy .eyebrow{margin-bottom:22px}.preview-copy h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(42px,5.2vw,82px);line-height:.98;margin:0 0 24px}.preview-copy p{font-size:17px;line-height:1.55;color:#c8d6d1;max-width:500px}.preview-copy .preview-count{display:block;margin-top:28px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
     .bottom{z-index:1;display:flex;justify-content:space-between;gap:24px;padding:20px clamp(24px,5.6vw,88px);border-top:1px solid var(--line);color:#aeb8ad;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
     .viewer{display:none;height:100dvh;flex-direction:column;background:#ece9e2;color:#14201d}
     .viewer-head{height:55px;flex:none;background:#101b1d;color:#f0f2e8;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 clamp(16px,3vw,40px)}
@@ -59,9 +64,17 @@
     .viewer-nav button:hover,.viewer-nav button.active{border-color:#627368;color:white}
     .viewer-nav .lock{margin-left:7px;color:#b2dca8}
     .viewer .stage{width:100%;height:calc(100dvh - 55px);overflow:auto;background:#edeae4;scroll-behavior:smooth}
+    .guide-launch{position:fixed;right:23px;bottom:22px;z-index:55;border:1px solid #b9d9bb;background:#132927;color:#f5f8ed;display:flex;align-items:center;gap:10px;padding:7px 15px 7px 7px;box-shadow:0 15px 35px #06131366;border-radius:32px;font-weight:700;font-size:13px}
+    .guide-launch img{width:39px;height:39px;object-fit:cover;border-radius:50%}.guide-launch:hover{background:#21443b}
+    .guide-panel{position:fixed;right:22px;bottom:86px;z-index:56;width:min(410px,calc(100vw - 28px));height:min(650px,calc(100dvh - 110px));display:flex;flex-direction:column;background:#f5f3ed;color:#1a2b2d;border:1px solid #75918b;box-shadow:0 25px 70px #08171588}
+    .guide-head{display:flex;align-items:center;gap:11px;padding:13px 14px;background:#132927;color:#fff}.guide-head img{width:42px;height:42px;border-radius:50%;object-fit:cover}.guide-head b{display:block;font-size:14px}.guide-head small{display:block;color:#bfe0c0;font-size:10px;letter-spacing:.09em;text-transform:uppercase}.guide-head button{margin-left:auto;border:1px solid #7e9d8c;color:#fff;background:transparent;width:32px;height:32px;font-size:20px;line-height:1}
+    .guide-messages{flex:1;overflow:auto;padding:18px 15px;display:flex;flex-direction:column;gap:13px}.guide-message{max-width:93%;border-radius:12px;padding:11px 13px;font-size:13px;line-height:1.45;white-space:pre-wrap}.guide-message.assistant{align-self:flex-start;background:#e3ebe4}.guide-message.user{align-self:flex-end;background:#193e36;color:#fff}.guide-message.pending{color:#52665e;font-style:italic}.guide-sources{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;white-space:normal}.guide-sources button,.guide-sources a{display:inline-block;border:1px solid #99b2a3;background:#f4f9f2;color:#224232;font-size:10px;line-height:1.2;text-decoration:none;padding:6px 8px;border-radius:20px}
+    .guide-starters{display:flex;gap:7px;overflow:auto;padding:0 15px 12px}.guide-starters button{flex:none;border:1px solid #98b1a5;background:transparent;color:#284d3d;border-radius:20px;padding:7px 10px;font-size:11px}
+    .guide-form{border-top:1px solid #c2d2ca;padding:11px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.guide-form textarea{resize:none;border:1px solid #8fa99a;padding:10px;font-size:13px;min-height:43px;max-height:90px;background:#fff;color:#162824}.guide-form button{background:#b9e5a4;color:#172c23;border:1px solid #8dc378;padding:0 15px;font-size:12px;font-weight:800}.guide-form button:disabled{opacity:.55;cursor:wait}
+    .guide-status{margin:0;padding:0 13px 10px;color:#62766a;font-size:10px;min-height:12px}
     [hidden]{display:none!important}
-    @media(max-width:900px){.body{grid-template-columns:1fr;gap:30px}.graphic{min-height:300px;order:-1}.poster{height:275px;min-height:0;width:170px}.poster.one{transform:translateX(-82px) translateY(14px) rotate(-12deg)}.poster.two{transform:translateX(82px) translateY(14px) rotate(11deg)}.poster.three{transform:translateY(-8px)}.poster strong{font-size:33px}.graphic .issue{display:none}h1{font-size:clamp(60px,10vw,95px)}}
-    @media(max-width:600px){.top{padding:19px 22px}.topright{font-size:8px;max-width:150px}.body{padding:34px 22px 48px;gap:23px}.graphic{min-height:238px}.poster{height:215px;width:128px}.poster.one{transform:translateX(-60px) translateY(11px) rotate(-12deg)}.poster.two{transform:translateX(60px) translateY(11px) rotate(11deg)}.poster .postertext{padding:13px}.poster strong{font-size:26px}.poster small{font-size:7px}.eyebrow{margin-bottom:20px}h1{font-size:clamp(53px,13vw,78px);margin-bottom:18px}.intro{margin-bottom:27px;font-size:16px}.access-row{flex-direction:column}.access button{height:52px}.bottom{padding:16px 22px;flex-direction:column;gap:6px;font-size:9px}.viewer-head{height:auto;min-height:55px;flex-wrap:wrap;padding:9px 15px}.viewer-nav{gap:0;flex-wrap:wrap}.viewer-nav button{font-size:9px;padding:8px}.viewer .stage{height:calc(100dvh - 86px)}}
+    @media(max-width:900px){.body{grid-template-columns:1fr;gap:30px}.graphic{min-height:310px;order:-1}.poster{min-height:0;width:180px;max-height:none}.poster[data-position="left"]{transform:translateX(-85px) translateY(14px) translateZ(-95px) rotateY(21deg)}.poster[data-position="right"]{transform:translateX(85px) translateY(14px) translateZ(-95px) rotateY(-21deg)}.graphic .issue{display:none}h1{font-size:clamp(60px,10vw,95px)}.preview{grid-template-columns:1fr}.preview-copy{order:-1}.preview-video{max-width:340px}}
+    @media(max-width:600px){.top{padding:19px 22px}.topright{font-size:8px;max-width:150px}.body{padding:34px 22px 48px;gap:23px}.graphic{min-height:238px}.poster{width:138px}.poster[data-position="left"]{transform:translateX(-65px) translateY(11px) translateZ(-100px) rotateY(21deg)}.poster[data-position="right"]{transform:translateX(65px) translateY(11px) translateZ(-100px) rotateY(-21deg)}.eyebrow{margin-bottom:20px}h1{font-size:clamp(53px,13vw,78px);margin-bottom:18px}.intro{margin-bottom:27px;font-size:16px}.access-row{flex-direction:column}.access button{height:52px}.bottom{padding:16px 22px;flex-direction:column;gap:6px;font-size:9px}.viewer-head{height:auto;min-height:55px;flex-wrap:wrap;padding:9px 15px}.viewer-nav{gap:0;flex-wrap:wrap}.viewer-nav button{font-size:9px;padding:8px}.viewer .stage{height:calc(100dvh - 86px)}.guide-panel{right:14px;bottom:74px;height:min(650px,calc(100dvh - 95px))}.guide-launch{right:14px;bottom:12px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
@@ -78,12 +91,14 @@
           <div class="access-row"><input id="access-word" name="access-word" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter access word" required><button type="submit" id="open-button">Enter the review <span aria-hidden="true">↗</span></button></div>
           <p class="hint" id="status" role="status" aria-live="polite">Enter your access word to continue.</p>
         </form>
+        <a class="preview-link" href="#preview">Watch the Friday Night Fights preview ↓</a>
       </div>
-      <div class="graphic" aria-hidden="true"><div class="poster one"><img src="cover-transfer-clause.webp" alt=""><div class="postertext"><small>Original series / concept</small><strong>The Transfer<br>Clause</strong><small>02 / 03</small></div></div><div class="poster two"><img src="cover-captains-post.webp" alt=""><div class="postertext"><small>Original series / concept</small><strong>The Captain's<br>Post</strong><small>03 / 03</small></div></div><div class="poster three"><img src="cover-home-court.webp" alt=""><div class="postertext"><small>Opening Frame / concept</small><strong>Home<br>Court</strong><small>01 / 03</small></div></div><div class="issue">AI-generated fictional concept art<br>No athlete or production attached</div></div>
+      <div class="graphic" aria-label="Opening Frame original series catalog"><button class="poster" type="button" data-gate-index="0" data-position="center" aria-label="View Home Court"><img src="cover-home-court.webp" alt="Home Court poster"></button><button class="poster" type="button" data-gate-index="1" data-position="right" aria-label="View The Transfer Clause"><img src="cover-transfer-clause.webp" alt="The Transfer Clause poster"></button><button class="poster" type="button" data-gate-index="2" data-position="far" aria-label="View The Captain's Post"><img src="cover-captains-post.webp" alt="The Captain's Post poster"></button><button class="poster" type="button" data-gate-index="3" data-position="left" aria-label="View Friday Night Fights"><img src="cover-friday-night-fights.webp" alt="Friday Night Fights poster"></button><div class="issue"><strong id="gate-title">Home Court</strong>01 / 04 · Click a cover to browse</div></div>
     </div>
+    <section class="preview" id="preview" aria-labelledby="preview-title"><div class="preview-video"><video controls playsinline preload="none" poster="cover-friday-night-fights.webp" aria-label="Friday Night Fights series preview"><source src="preview-friday-night-fights.mp4" type="video/mp4">Your browser does not support video playback.</video></div><div class="preview-copy"><p class="eyebrow">First look / original series</p><h2 id="preview-title">Friday Night Fights</h2><p>After the final whistle, the team meets beneath the stadium. What begins as a private ritual becomes dangerous when someone starts recording the fights.</p><span class="preview-count">15-second concept teaser · press play</span></div></section>
     <footer class="bottom"><span>Opening Frame / Working concept</span><span>For invited review and response</span></footer>
   </main>
-  <main class="viewer" id="viewer" aria-label="Unlocked review"><header class="viewer-head"><div class="logo">OPENING<span>FRAME</span></div><nav class="viewer-nav" aria-label="Review pages"><button type="button" data-page="strategy" class="active">Strategy</button><button type="button" data-page="atlas">Research atlas</button><button type="button" id="document-button" hidden>Conversation PDF ↓</button><button type="button" class="lock" id="lock-button">Lock ↗</button></nav></header><div class="stage" id="stage" role="region" aria-label="Opening Frame review content"></div></main>
+  <main class="viewer" id="viewer" data-guide-endpoint="" aria-label="Unlocked review"><header class="viewer-head"><div class="logo">OPENING<span>FRAME</span></div><nav class="viewer-nav" aria-label="Review pages"><button type="button" data-page="strategy" class="active">Full strategy</button><button type="button" data-page="atlas">U.S. research atlas</button><button type="button" id="document-button" hidden>Conversation PDF ↓</button><button type="button" class="lock" id="lock-button">Lock ↗</button></nav></header><div class="stage" id="stage" role="region" aria-label="Opening Frame review content"></div><button class="guide-launch" id="guide-launch" type="button" aria-expanded="false" aria-controls="guide-panel" hidden><img src="guide-avatar.webp" alt=""><span>Ask the guide</span></button><aside class="guide-panel" id="guide-panel" aria-label="Opening Frame AI research guide" hidden><div class="guide-head"><img src="guide-avatar.webp" alt=""><div><b>Opening Frame Guide</b><small>AI research companion</small></div><button type="button" id="guide-close" aria-label="Close guide">×</button></div><div class="guide-messages" id="guide-messages" role="log" aria-live="polite"><div class="guide-message assistant">Hey Linh, I’m here to answer your questions. You can go through the guide yourself, but you’re not alone. I’ve worked through the research with Tom. Ask me about any page, a company on the map, or one of the shows.</div></div><div class="guide-starters"><button type="button" data-guide-prompt="What is happening in the U.S. microdrama market?">The U.S. market</button><button type="button" data-guide-prompt="What makes the NIL angle different?">The NIL angle</button><button type="button" data-guide-prompt="Which of the four shows should we test first?">The first show</button></div><form class="guide-form" id="guide-form"><textarea id="guide-question" maxlength="700" placeholder="Ask about the strategy or research…" aria-label="Question for Opening Frame Guide" required></textarea><button id="guide-send" type="submit">Ask ↗</button></form><p class="guide-status" id="guide-status" role="status"></p></aside></main>
   <script>
     (() => {
       const form = document.getElementById('access-form');
@@ -96,6 +111,23 @@
       const docButton = document.getElementById('document-button');
       let bundle = null;
       let activeStyles = [];
+      let sessionWord = '';
+      let currentPage = 'strategy';
+      const guideEndpoint = viewer.dataset.guideEndpoint;
+      const guideLaunch = document.getElementById('guide-launch');
+      const guidePanel = document.getElementById('guide-panel');
+      const guideMessages = document.getElementById('guide-messages');
+      const guideQuestion = document.getElementById('guide-question');
+      const guideForm = document.getElementById('guide-form');
+      const guideSend = document.getElementById('guide-send');
+      const guideStatus = document.getElementById('guide-status');
+      const guideHistory = [];
+      const gateCards = [...document.querySelectorAll('[data-gate-index]')];
+      const gateTitles = ['Home Court', 'The Transfer Clause', "The Captain's Post", 'Friday Night Fights'];
+      gateCards.forEach((card, index) => card.addEventListener('click', () => {
+        gateCards.forEach((item, n) => { item.dataset.position = ['center','right','far','left'][(n - index + gateCards.length) % gateCards.length]; });
+        document.getElementById('gate-title').textContent = gateTitles[index];
+      }));
 
       const fromBase64 = value => Uint8Array.from(atob(value), character => character.charCodeAt(0));
       async function tryOpen(word, vault) {
@@ -113,6 +145,7 @@
       }
       function showPage(page, hash = '') {
         if (!bundle || !bundle.pages[page]) return;
+        currentPage = page;
         const parsed = new DOMParser().parseFromString(bundle.pages[page], 'text/html');
         const scripts = [...parsed.querySelectorAll('script')]
           .map(node => node.textContent)
@@ -136,6 +169,73 @@
         document.querySelectorAll('[data-page]').forEach(item => item.classList.toggle('active', item.dataset.page === page));
         if (hash) stage.querySelector(`#${CSS.escape(decodeURIComponent(hash))}`)?.scrollIntoView();
       }
+      function guideSection() {
+        const top = stage.getBoundingClientRect().top + 145;
+        return [...stage.querySelectorAll('section[id]')].filter(node => node.getBoundingClientRect().top <= top).at(-1)?.id || '';
+      }
+      function addGuideMessage(role, text, sources = []) {
+        const bubble = document.createElement('div');
+        bubble.className = `guide-message ${role}`;
+        bubble.textContent = text;
+        if (sources.length) {
+          const list = document.createElement('div');
+          list.className = 'guide-sources';
+          for (const source of sources.slice(0, 3)) {
+            if (source.page === 'strategy' && source.section) {
+              const link = document.createElement('button');
+              link.type = 'button'; link.textContent = `Read ${source.label} ↗`;
+              link.addEventListener('click', () => { showPage('strategy', source.section); guidePanel.hidden = true; guideLaunch.setAttribute('aria-expanded', 'false'); });
+              list.appendChild(link);
+            } else if (typeof source.url === 'string' && source.url.startsWith('https://')) {
+              const link = document.createElement('a');
+              link.href = source.url; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = `${source.label} ↗`;
+              list.appendChild(link);
+            }
+          }
+          bubble.appendChild(list);
+        }
+        guideMessages.appendChild(bubble);
+        guideMessages.scrollTop = guideMessages.scrollHeight;
+        return bubble;
+      }
+      guideLaunch.addEventListener('click', () => {
+        guidePanel.hidden = !guidePanel.hidden;
+        guideLaunch.setAttribute('aria-expanded', String(!guidePanel.hidden));
+        if (!guidePanel.hidden) guideQuestion.focus();
+      });
+      document.getElementById('guide-close').addEventListener('click', () => {
+        guidePanel.hidden = true; guideLaunch.setAttribute('aria-expanded', 'false'); guideLaunch.focus();
+      });
+      document.querySelectorAll('[data-guide-prompt]').forEach(item => item.addEventListener('click', () => {
+        guideQuestion.value = item.dataset.guidePrompt;
+        guideForm.requestSubmit();
+      }));
+      guideForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        const question = guideQuestion.value.trim();
+        if (!guideEndpoint || !sessionWord || question.length < 3) return;
+        guideQuestion.value = '';
+        guideSend.disabled = true;
+        guideStatus.textContent = 'Checking the research…';
+        addGuideMessage('user', question);
+        const pending = addGuideMessage('assistant pending', 'Looking into that…');
+        try {
+          const response = await fetch(guideEndpoint, {
+            method: 'POST', headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({accessWord:sessionWord,question,page:currentPage,section:guideSection(),history:guideHistory.slice(-4)})
+          });
+          const data = await response.json();
+          pending.remove();
+          if (!response.ok) throw new Error(data.message || 'The guide could not answer just now.');
+          addGuideMessage('assistant', data.answer, data.sources || []);
+          guideHistory.push({role:'user',content:question},{role:'assistant',content:data.answer});
+          guideStatus.textContent = `${data.remainingQuestionsToday} questions left today · Research through ${data.researchAsOf}`;
+        } catch (error) {
+          pending.remove();
+          addGuideMessage('assistant', error.message || 'The guide could not connect just now.');
+          guideStatus.textContent = 'You can keep reading the strategy and try again later.';
+        } finally { guideSend.disabled = false; guideQuestion.focus(); }
+      });
       stage.addEventListener('click', event => {
         const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
         if (!anchor) return;
@@ -170,8 +270,10 @@
             return;
           }
           input.value = '';
+          sessionWord = word;
           gate.hidden = true;
           viewer.style.display = 'flex';
+          guideLaunch.hidden = !guideEndpoint;
           docButton.hidden = !(bundle.documents && bundle.documents.length);
           showPage('strategy');
         } catch (_) {
@@ -194,6 +296,12 @@
         stage.replaceChildren();
         activeStyles.forEach(node => node.remove()); activeStyles = [];
         bundle = null;
+        sessionWord = '';
+        guidePanel.hidden = true;
+        guideLaunch.hidden = true;
+        guideLaunch.setAttribute('aria-expanded', 'false');
+        guideHistory.length = 0;
+        guideMessages.querySelectorAll('.guide-message:not(:first-child)').forEach(node => node.remove());
         viewer.style.display = 'none'; gate.hidden = false;
         status.classList.remove('error'); status.textContent = 'Enter your access word to continue.';
         input.focus();

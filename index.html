@@ -9,7 +9,7 @@
   <title>Opening Frame · Private screening</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Bungee&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{--black:#080809;--coal:#111111;--wine:#290d0c;--red:#ac3027;--gold:#ecc087;--cream:#f6eee1;--muted:#bbafa1;--line:#6e4b39;--ui:'Manrope',Arial,sans-serif;--display:'Barlow Condensed',Impact,sans-serif}
     *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--black);color:var(--cream);font-family:var(--ui);-webkit-font-smoothing:antialiased} button,input{font:inherit}button{cursor:pointer}a{color:inherit} :focus-visible{outline:2px solid var(--gold);outline-offset:4px}[hidden]{display:none!important}
@@ -71,11 +71,49 @@
 
     .guide-launch{width:300px;height:153px;right:10px;bottom:8px;padding:0 26px 0 3px;gap:0;border:0;box-shadow:none;background:transparent url('ui-tom-ai-speech-frame-v1.webp') center/100% 100% no-repeat;filter:drop-shadow(0 10px 18px #0008)}.guide-launch:hover{background:transparent url('ui-tom-ai-speech-frame-v1.webp') center/100% 100% no-repeat;filter:drop-shadow(0 0 15px #bf855477)}.guide-launch video{width:103px;height:147px;flex:none}.guide-launch span{padding:0 0 3px 0}.guide-launch strong{color:#f4d2a7}.guide-launch small{color:#f6ead9}
     @media(max-width:620px){.guide-launch{width:205px;height:107px;right:5px;bottom:5px;padding-right:19px}.guide-launch video{width:71px;height:105px}.guide-launch strong{font-size:18px}.guide-launch small{font-size:9px}}
+    .screening-note{grid-template-columns:minmax(0,1.1fr) minmax(355px,.9fr);align-items:center;gap:clamp(30px,5vw,90px);padding-top:clamp(46px,6vw,84px);padding-bottom:clamp(46px,6vw,84px);background:radial-gradient(ellipse at 75% 75%,#4920185c,transparent 48%),#120c0b}
+    .screening-note h1 small{max-width:550px}
+    .screening-access{position:relative;isolation:isolate;overflow:hidden;border:1px solid #ba895d;background:#21110ef0;padding:clamp(25px,3vw,43px);box-shadow:0 24px 70px #0008,0 0 0 5px #ce955621}
+    .screening-access:before{content:'';position:absolute;inset:0;background:url('theater-arena-empty-v2.webp') center/cover;opacity:.19;z-index:-2}
+    .screening-access:after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,#210f0feb 28%,#210f0fa8);z-index:-1}
+    .screening-access .section-kicker{font-size:14px;letter-spacing:.17em;margin-bottom:13px}
+    .screening-access h2{font:800 clamp(38px,3.7vw,58px)/.9 var(--display);text-transform:uppercase;margin:0 0 14px;max-width:470px}
+    .screening-access>p:not(.section-kicker){font-size:14px;line-height:1.6;color:#edddce;max-width:450px;margin:0 0 25px}
+    .screening-access label{display:block;font:800 14px var(--display);letter-spacing:.13em;text-transform:uppercase;color:#f5d1a6;margin-bottom:9px}
+    .screening-access-fields{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+    .screening-access input{width:100%;min-width:0;min-height:54px;padding:0 15px;border:1px solid #e3c49c;background:#f7f0e5;color:#271711;font-size:16px}
+    .screening-access button{min-height:54px;padding:0 16px;border:1px solid #ffe0aa;background:#e8b57b;color:#22110d;font:800 16px var(--display);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+    .screening-access button:hover{background:#ffe0ab}.screening-access button:disabled{opacity:.6}
+    .screening-access .hint{min-height:18px;margin:10px 0 0;color:#e3c6ab;font-size:12px}
+    .preview-intro{position:fixed;inset:0;z-index:75;display:grid;place-items:center;overflow-y:auto;padding:22px;background:#030202e8;backdrop-filter:blur(12px)}
+    .preview-intro-dialog{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(360px,.75fr);width:min(1500px,100%);overflow:hidden;border:1px solid #d1a06b;background:#170d0b;box-shadow:0 35px 110px #000e}
+    .preview-intro-art{position:relative;min-height:635px;background:#170d0b url('tom-ai-research-studio-keyframe-v1.webp') center/cover}
+    .preview-intro-art:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 65%,#170d0b9c)}
+    .preview-intro-art video{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:38% center}
+    .preview-intro-art img{position:absolute;z-index:1;top:0;left:0;display:block;width:min(165px,35%);margin:22px 0 0 22px;filter:drop-shadow(0 7px 17px #000b)}
+    .preview-intro-film-label{position:absolute;z-index:2;left:24px;bottom:20px;max-width:70%;padding:8px 12px;border:1px solid #dca76baa;background:#160b09ce;color:#ffe0bb;font:800 13px var(--display);text-transform:uppercase;letter-spacing:.13em;box-shadow:0 6px 20px #000a}
+    .intro-caption{position:absolute;z-index:3;left:5%;right:5%;bottom:65px;min-height:80px;display:flex;align-items:end;justify-content:center;text-align:center;pointer-events:none;font:400 clamp(20px,2.4vw,37px)/1.12 'Bungee',Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;color:#fff6e9;-webkit-text-stroke:1.5px #1b0a08;text-shadow:3px 4px 0 #210805,0 8px 17px #000,0 0 26px #000}.intro-caption span{display:inline-block;padding:8px 14px;background:linear-gradient(90deg,#120a08c9,#120a08a1);box-shadow:0 6px 24px #0009;animation:caption-pop .26s cubic-bezier(.2,.8,.2,1) both}.intro-caption em{font-style:normal;color:#ffcd68;text-shadow:3px 4px 0 #611b13,0 0 18px #c24b25}
+    @keyframes caption-pop{from{opacity:.3;transform:translateY(12px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .preview-intro-copy{padding:clamp(32px,4vw,52px);display:flex;flex-direction:column;justify-content:center;background:radial-gradient(circle at 100% 0,#59291a4a,transparent 55%),#170d0b}
+    .preview-intro-copy .section-kicker{margin-bottom:15px}
+    .preview-intro-copy h2{font:800 clamp(50px,5vw,87px)/.89 var(--display);text-transform:uppercase;margin:0 0 22px}
+    .preview-intro-copy h2 span{color:var(--gold)}
+    .preview-intro-copy p:not(.section-kicker){font-size:17px;line-height:1.65;color:#ead8c6;margin:0;max-width:490px}
+    .preview-intro-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+    .preview-intro-actions button{min-height:49px;padding:11px 16px;font:800 15px var(--display);text-transform:uppercase;letter-spacing:.09em}
+    .preview-intro-actions .sound{width:100%;border:1px solid #c58d5d;background:#3a1c14;color:#ffe3be;text-align:left}
+    .preview-intro-actions .primary{border:1px solid #ffe2b1;background:#e9b982;color:#24120d}
+    .preview-intro-actions .secondary{border:1px solid #a77755;background:#2d1711;color:#f3dcc3}
+    .preview-intro-actions button:hover{filter:brightness(1.12)}
+    .preview-intro-close{position:absolute;right:13px;top:13px;z-index:2;width:35px;height:35px;border:1px solid #bd8a61;background:#1e0d0bd9;color:#f8e8d3;font-size:23px;line-height:1}
+    @media(max-width:950px){.screening-note{grid-template-columns:1fr;gap:28px}.screening-access{max-width:660px}}
+    .gate-guide{max-width:550px}.gate-guide figure{width:220px;height:330px}.gate-guide-card{width:330px;min-height:235px;padding:30px 37px 34px 31px}.gate-guide-card b{font-size:29px}.gate-guide-card p{font-size:13px;line-height:1.5}.gate-guide-card button{font-size:12px;padding:9px 11px}
+    @media(max-width:650px){.screening-note{padding:40px 18px 47px}.screening-note h1{font-size:clamp(42px,11vw,60px)}.screening-access{padding:25px 20px}.screening-access h2{font-size:45px}.screening-access-fields{grid-template-columns:1fr}.screening-access button{width:100%}.preview-intro{padding:13px}.preview-intro-dialog{grid-template-columns:1fr;max-width:480px}.preview-intro-art{min-height:225px;background-position:center 37%}.preview-intro-art:after{background:linear-gradient(transparent 75%,#170d0b)}.preview-intro-art img{width:105px;margin:12px 0 0 16px}.preview-intro-film-label{left:14px;bottom:11px;font-size:10px}.intro-caption{bottom:40px;min-height:36px;font-size:clamp(12px,3.7vw,18px);-webkit-text-stroke:.7px #1b0a08;text-shadow:1px 2px 0 #210805,0 5px 10px #000}.intro-caption span{padding:5px 7px}.intro-caption em{text-shadow:1px 2px 0 #611b13}.preview-intro-copy{padding:23px 22px 27px}.preview-intro-copy h2{font-size:clamp(42px,11vw,56px)}.preview-intro-copy p:not(.section-kicker){font-size:13px;line-height:1.45}.preview-intro-actions{margin-top:16px}.preview-intro-actions button{width:100%;min-height:43px}.gate-guide{right:7px;bottom:6px;max-width:calc(100vw - 14px)}.gate-guide figure{width:115px;height:184px;margin-left:-8px}.gate-guide-card{width:calc(100vw - 130px);max-width:260px;min-height:175px;padding:20px 22px 24px 19px}.gate-guide-card b{font-size:21px}.gate-guide-card p{font-size:11px}.gate-guide-card button{font-size:9px;padding:6px 7px}}
   </style>
 </head>
 <body>
   <main class="gate" id="gate">
-    <header class="top"><a class="top-brand" href="#top" aria-label="Opening Frame, return to top"><img src="opening-frame-wordmark-v1.webp" alt="Opening Frame"></a><nav aria-label="Screening room"><button type="button" data-scroll-to="top">Browse the stories</button><button class="guide-nav" id="guide-nav" type="button">Tom.AI ↗</button><button class="entry-link" type="button" data-open-access>Open the strategy ↗</button></nav></header>
+    <header class="top"><a class="top-brand" href="#top" aria-label="Opening Frame, return to top"><img src="opening-frame-wordmark-v1.webp" alt="Opening Frame"></a><nav aria-label="Screening room"><button type="button" data-scroll-to="top">Browse the stories</button><button class="guide-nav" id="guide-nav" type="button">Tom.AI ↗</button><button class="entry-link" type="button" data-scroll-to="full-review">Full review ↗</button></nav></header>
     <section class="hero" id="top" aria-label="Interactive Opening Frame series screening room" tabindex="0"><div class="hero-ribbon">Tom + Linh / Private screening</div><div class="hero-collection" id="hero-collection" aria-label="Swipe or drag through the individual series covers">
       <button class="hero-card" type="button" data-hero-index="0" aria-label="Feature Home Court"><img src="cover-home-court-v2.webp" alt="Home Court poster"><span class="production-credit">A LINH LE ORIGINAL PRODUCTION</span></button>
       <button class="hero-card" type="button" data-hero-index="1" aria-label="Feature The Transfer Clause"><img src="cover-transfer-clause-v2.webp" alt="The Transfer Clause poster"><span class="production-credit">A LINH LE ORIGINAL PRODUCTION</span></button>
@@ -88,15 +126,29 @@
       <button class="hero-card" type="button" data-hero-index="8" aria-label="Feature The Last Landing"><img src="the-last-landing-poster.webp" alt="The Last Landing poster"><span class="production-credit">A LINH LE ORIGINAL PRODUCTION</span></button>
       <button class="hero-card" type="button" data-hero-index="9" aria-label="Feature The Walk-On Went Viral"><img src="the-walk-on-went-viral-poster.webp" alt="The Walk-On Went Viral poster"><span class="production-credit">A LINH LE ORIGINAL PRODUCTION</span></button>
     </div><div class="hero-stage-controls"><button class="dial dial-left" type="button" data-hero-direction="-1" aria-label="Previous title"><img src="nav-dial-v1.webp" alt=""></button><div class="hero-current"><span id="hero-current-index">04 / 10</span><strong id="hero-current-title">Friday Night Fights</strong></div><button class="dial" type="button" data-hero-direction="1" aria-label="Next title"><img src="nav-dial-v1.webp" alt=""></button><button class="hero-watch" id="hero-watch" type="button">Watch teaser ↗</button></div><span class="hero-instruction">Swipe the posters. Select a story to watch. Hover for a moving teaser.</span></section>
-    <section class="screening-note" aria-labelledby="screening-title"><div><p class="section-kicker">Sports drama built with athletes</p><h1 id="screening-title">Could an athlete make the story <span>worth following?</span><small>Linh, watch the teasers, then tell me which story is worth testing in a market Hollywood is already entering.</small></h1></div><aside class="gate-guide" id="gate-guide" aria-label="Tom.AI, your animated guide" hidden><div class="gate-guide-card"><b>Hey, Linh. I'm Tom.AI.</b><p>Pick a story. I can show you what Tom found about the U.S. market, the NIL opening, and the pilot we should test.</p><button type="button" id="guide-welcome">Play Tom.AI’s introduction ▶</button><button type="button" id="gate-guide-audio" aria-pressed="false">Mute</button><button type="button" data-scroll-to="top">Back to the posters ↓</button></div><figure><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video></figure><button class="gate-guide-close" id="gate-guide-close" type="button" aria-label="Minimize Tom.AI">−</button></aside><button class="gate-guide-mini" id="gate-guide-mini" type="button" aria-label="Open Tom.AI guide"><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video><span><strong>Hey, Linh. I’m Tom.AI.</strong><small>Ask me about these stories ↗</small></span></button></section>
+    <section class="screening-note" aria-labelledby="screening-title">
+      <div><p class="section-kicker">Sports drama built with athletes</p><h1 id="screening-title">Could an athlete make the story <span>worth following?</span><small>Linh, watch the teasers, then tell me which story is worth testing in a market Hollywood is already entering.</small></h1></div>
+      <div class="screening-access" id="full-review" aria-labelledby="full-review-title">
+        <p class="section-kicker">Full research compilation</p>
+        <h2 id="full-review-title">Go inside the full review.</h2>
+        <p>The U.S. market map, NIL strategy, pilot plan, sources, and conversation PDF are here when you’re ready.</p>
+        <form id="inline-access-form">
+          <label for="inline-access-word">Enter your access word</label>
+          <div class="screening-access-fields"><input id="inline-access-word" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Access word" required><button id="inline-open-button" type="submit">Open full review ↗</button></div>
+          <p class="hint" id="inline-status" role="status" aria-live="polite">Your word opens the complete review here.</p>
+        </form>
+      </div>
+      <aside class="gate-guide" id="gate-guide" aria-label="Tom.AI, your animated guide"><div class="gate-guide-card"><b>Hey, over here, Linh!</b><p>I’m Tom.AI. Explore the stories, then enter the code Tom sent for the full research. I’d start with the Map.</p><button type="button" id="guide-welcome">Replay my welcome ▶</button><button type="button" id="gate-guide-audio" aria-pressed="false">Mute</button><button type="button" data-scroll-to="full-review">Full review ↗</button></div><figure><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video></figure><button class="gate-guide-close" id="gate-guide-close" type="button" aria-label="Minimize Tom.AI">−</button></aside><button class="gate-guide-mini" id="gate-guide-mini" type="button" aria-label="Open Tom.AI guide" hidden><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video><span><strong>Hey, Linh. I’m Tom.AI.</strong><small>Ask me about these stories ↗</small></span></button>
+    </section>
     <section class="spotlight" id="preview" aria-labelledby="preview-title"><div class="spotlight-backdrop" id="spotlight-backdrop"></div><div class="spotlight-inner"><div class="spotlight-copy"><p class="spotlight-index" id="spotlight-index">Teaser</p><h2 id="preview-title">Friday Night Fights</h2><div class="spotlight-meta"><span id="preview-genre">Football / Suspense</span><span>15-sec teaser</span></div><p class="spotlight-description" id="preview-description">Players stage secret Friday bouts beneath the stadium to cover a teammate’s medical bills. Someone secretly records the fight, then threatens to release the footage unless they lose Saturday’s game.</p><div class="name-picker"><b>Which title would you pitch?</b><div class="name-options" id="name-options"></div><span class="name-feedback" id="name-feedback" role="status">Pick a title to save your reaction.</span></div></div><div class="preview-video"><video id="preview-video" playsinline preload="none" poster="cover-friday-night-fights-v2.webp" aria-label="Friday Night Fights series preview"><source src="preview-friday-night-fights-v2-final.mp4" type="video/mp4">Your browser does not support video playback.</video><button class="preview-play" id="preview-play" type="button" aria-label="Play Friday Night Fights preview">▶</button><span class="preview-count" id="preview-note" role="status" aria-live="polite">Watch the teaser</span></div></div></section>
     <div class="development" id="development"><p class="development-note"><strong>The athlete question:</strong> Which role could a real player inhabit without turning the show into a highlight reel? The newer concepts in the same cover carousel test a basketball rival, rugby sisters, a stolen gymnastics routine, and a walk-on under sudden attention. The full review compares talent routes and what a pilot must prove.</p></div>
     <section class="venture" aria-labelledby="venture-title"><div><p class="section-kicker">Name the venture</p><h2 id="venture-title">Which name could carry more than one show?</h2><p><strong>NextPlay</strong> is Tom's favorite: the next play and the next episode. <strong>ShortPlay</strong> carries the format in the name. The FastBreak family adds speed and a story promise. These are working names to react to.</p></div><div><div class="venture-options" id="venture-options"><button type="button">NextPlay</button><button type="button">PlayClock</button><button type="button">ShortPlay</button><button type="button">FastBreak Stories</button><button type="button">FastBreak Originals</button><button type="button">FastBreak Drama</button></div><form class="name-submit" id="name-submit"><label for="custom-name">Your platform name</label><div><input id="custom-name" type="text" maxlength="40" placeholder="A name you can see on an app" autocomplete="off"><button type="submit">Add idea ↗</button></div></form><p class="venture-result" id="venture-result" role="status">Tap a name. Your reaction stays in this browser.</p></div></section>
-    <section class="entry-banner"><div><h2>Hollywood is moving in. Where could we fit?</h2><p>See the U.S. players, the NIL opportunity, and the pilot Tom thinks we should test.</p></div><button type="button" data-open-access>Open the strategy ↗</button></section>
+    <section class="entry-banner"><div><h2>Ready for the full review?</h2><p>Enter your access word to explore the research behind the screening room.</p></div><button type="button" data-scroll-to="full-review">Enter access word ↗</button></section>
     <footer class="bottom"><span>Opening Frame / Tom + Linh</span><span>Browse the stories · Then make the call</span></footer>
   </main>
-  <div class="access-overlay" id="access-overlay" hidden><div class="access-dialog" role="dialog" aria-modal="true" aria-labelledby="access-heading"><button class="access-close" type="button" id="access-close" aria-label="Close access window">×</button><div class="access-story"><img src="opening-frame-wordmark-v1.webp" alt="Opening Frame"><div><p class="section-kicker">For Linh</p><h2 id="access-heading">The research behind these stories is inside.</h2><p>I mapped the U.S. market, the athlete-led precedents, and a practical pilot to pressure-test together.</p><div class="access-items"><span>U.S. landscape</span><span>NIL strategy</span><span>Conversation PDF</span><span>Tom.AI</span></div></div></div><div class="access-form-wrap"><p class="section-kicker">Your invitation</p><form class="access" id="access-form"><label for="access-word">Enter your access word</label><input id="access-word" name="access-word" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Access word" required><button type="submit" id="open-button">Open the strategy ↗</button><p class="hint" id="status" role="status" aria-live="polite">Enter your word to continue.</p></form></div></div></div>
-  <main class="viewer" id="viewer" data-guide-endpoint="https://opening-frame-guide.vercel.app/api/chat" aria-label="Unlocked review"><header class="viewer-head"><div class="viewer-brand">Opening Frame</div><nav class="viewer-nav" aria-label="Review pages"><button type="button" id="back-to-slate">← The slate</button><button type="button" data-page="strategy" class="active">Strategy</button><button type="button" data-page="atlas">U.S. atlas</button><button type="button" id="document-button" hidden>Conversation PDF ↓</button><button type="button" class="lock" id="lock-button">Lock ↗</button></nav></header><div class="stage" id="stage" role="region" aria-label="Opening Frame review content"></div><button class="guide-launch" id="guide-launch" type="button" aria-expanded="false" aria-controls="guide-panel" hidden><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video><span><strong>Tom.AI</strong><small>Ask me about any page ↗</small></span></button><aside class="guide-panel" id="guide-panel" aria-label="Tom.AI research guide" hidden><div class="guide-head"><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video><div><b>Tom.AI</b><small>Your Opening Frame companion</small></div><button type="button" id="guide-audio-unlocked" aria-pressed="false" aria-label="Mute Tom.AI">Mute</button><button type="button" id="guide-close" aria-label="Minimize Tom.AI">−</button></div><div class="guide-messages" id="guide-messages" role="log" aria-live="polite"><div class="guide-message assistant">Hey Linh, I’m Tom.AI. I worked through the research with Tom. You can explore this guide yourself, and you can ask me about any page, the U.S. market, the NIL angle, or the stories.</div></div><div class="guide-starters"><button type="button" data-guide-prompt="What is happening in the U.S. microdrama market?">The U.S. market</button><button type="button" data-guide-prompt="What makes the NIL angle different?">The NIL angle</button><button type="button" data-guide-prompt="Which story should we test first?">The first story</button></div><form class="guide-form" id="guide-form"><textarea id="guide-question" maxlength="700" placeholder="Ask about the strategy or research…" aria-label="Question for Tom.AI" required></textarea><button id="guide-send" type="submit">Ask ↗</button></form><p class="guide-status" id="guide-status" role="status"></p></aside></main>
+  <div class="preview-intro" id="preview-intro" hidden><div class="preview-intro-dialog" role="dialog" aria-modal="true" aria-labelledby="preview-intro-title" aria-describedby="preview-intro-description"><button class="preview-intro-close" id="preview-intro-close" type="button" aria-label="Close welcome">×</button><div class="preview-intro-art"><video id="preview-intro-film" src="tom-ai-research-studio-intro-v1.mp4" poster="tom-ai-research-studio-keyframe-v1.webp" autoplay muted playsinline preload="auto" aria-label="Tom.AI welcomes Linh to the research studio"></video><img src="opening-frame-wordmark-v1.webp" alt="Opening Frame"><div class="intro-caption" id="intro-caption" aria-hidden="true"></div><span class="preview-intro-film-label">Tom.AI / Research studio</span></div><div class="preview-intro-copy"><p class="section-kicker">A welcome from Tom.AI</p><h2 id="preview-intro-title">Come on <span>in, Linh.</span></h2><p id="preview-intro-description">This room previews the sports slate. Tom’s AI team compiled research from your conversation and the U.S. microdrama landscape for the full review. Browse the teasers now. When you’re ready, enter the access code Tom sent you; I recommend starting with the Map.</p><div class="preview-intro-actions"><button class="sound" id="preview-intro-sound" type="button">Hear Tom.AI’s welcome ▶</button><button class="primary" id="preview-intro-browse" type="button">Browse the slate ↗</button><button class="secondary" id="preview-intro-access" type="button">Enter access code</button></div></div></div></div>
+  <div class="access-overlay" id="access-overlay" hidden><div class="access-dialog" role="dialog" aria-modal="true" aria-labelledby="access-heading"><button class="access-close" type="button" id="access-close" aria-label="Close access window">×</button><div class="access-story"><img src="opening-frame-wordmark-v1.webp" alt="Opening Frame"><div><p class="section-kicker">Full research compilation</p><h2 id="access-heading">The full review is inside.</h2><p>Explore the U.S. market, the NIL opening, and the pilot to pressure-test together.</p><div class="access-items"><span>U.S. landscape</span><span>NIL strategy</span><span>Conversation PDF</span><span>Tom.AI</span></div></div></div><div class="access-form-wrap"><p class="section-kicker">Your invitation</p><form class="access" id="access-form"><label for="access-word">Enter your access word</label><input id="access-word" name="access-word" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Access word" required><button type="submit" id="open-button">Open full review ↗</button><p class="hint" id="status" role="status" aria-live="polite">Enter your word to continue.</p></form></div></div></div>
+  <main class="viewer" id="viewer" data-guide-endpoint="https://opening-frame-guide.vercel.app/api/chat" aria-label="Unlocked review"><header class="viewer-head"><div class="viewer-brand">Opening Frame</div><nav class="viewer-nav" aria-label="Review pages"><button type="button" id="back-to-slate">← The slate</button><button type="button" data-page="strategy" class="active">Strategy</button><button type="button" data-page="atlas">The Map</button><button type="button" id="document-button" hidden>Conversation PDF ↓</button><button type="button" class="lock" id="lock-button">Lock ↗</button></nav></header><div class="stage" id="stage" role="region" aria-label="Opening Frame review content"></div><button class="guide-launch" id="guide-launch" type="button" aria-expanded="false" aria-controls="guide-panel" hidden><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video><span><strong>Tom.AI</strong><small>Ask me about any page ↗</small></span></button><aside class="guide-panel" id="guide-panel" aria-label="Tom.AI research guide" hidden><div class="guide-head"><video src="tom-ai-listening-alpha-v1.webm" autoplay muted playsinline aria-hidden="true"></video><div><b>Tom.AI</b><small>Your Opening Frame companion</small></div><button type="button" id="guide-audio-unlocked" aria-pressed="false" aria-label="Mute Tom.AI">Mute</button><button type="button" id="guide-close" aria-label="Minimize Tom.AI">−</button></div><div class="guide-messages" id="guide-messages" role="log" aria-live="polite"><div class="guide-message assistant">Hey Linh, I’m Tom.AI. I worked through the research with Tom. You can explore this guide yourself, and you can ask me about any page, the U.S. market, the NIL angle, or the stories.</div></div><div class="guide-starters"><button type="button" data-guide-prompt="What is happening in the U.S. microdrama market?">The U.S. market</button><button type="button" data-guide-prompt="What makes the NIL angle different?">The NIL angle</button><button type="button" data-guide-prompt="Which story should we test first?">The first story</button></div><form class="guide-form" id="guide-form"><textarea id="guide-question" maxlength="700" placeholder="Ask about the strategy or research…" aria-label="Question for Tom.AI" required></textarea><button id="guide-send" type="submit">Ask ↗</button></form><p class="guide-status" id="guide-status" role="status"></p></aside></main>
   <script src="carousel-motion.js"></script>
   <script>
     (() => {
@@ -107,6 +159,8 @@
       const gate = document.getElementById('gate');
       const gateGuide = document.getElementById('gate-guide');
       const accessOverlay = document.getElementById('access-overlay');
+      const previewIntro = document.getElementById('preview-intro');
+      const introFilm = document.getElementById('preview-intro-film');
       const viewer = document.getElementById('viewer');
       const stage = document.getElementById('stage');
       const docButton = document.getElementById('document-button');
@@ -184,8 +238,30 @@
       function markVenture(value){ventureButtons.forEach(item=>{item.classList.toggle('selected',item.textContent===value);item.setAttribute('aria-pressed',String(item.textContent===value));});document.getElementById('venture-result').textContent=value?`Your working pick: ${value}. Saved in this browser for your next conversation with Tom.`:'Tap a name. Your reaction stays in this browser.';}
       ventureButtons.forEach(item=>item.addEventListener('click',()=>{localStorage.setItem('opening-frame-platform-name',item.textContent);markVenture(item.textContent);}));markVenture(ventureSaved);
       document.getElementById('name-submit').addEventListener('submit',event=>{event.preventDefault();const custom=document.getElementById('custom-name');const value=custom.value.trim();if(!value)return;localStorage.setItem('opening-frame-platform-name',value);markVenture(value);custom.value='';});
-      function openAccess(){previewVideo.pause();carousel.pause('access');accessOverlay.hidden=false;document.body.style.overflow='hidden';input.focus();}function closeAccess(){accessOverlay.hidden=true;carousel.resume('access');document.body.style.overflow='';}
+      function dismissIntro(){if(previewIntro.hidden)return;previewIntro.hidden=true;introFilm.pause();carousel.resume('intro');document.body.style.overflow='';gateGuide.hidden=false;guideMini.hidden=true;}
+      function openAccess(){dismissIntro();previewVideo.pause();carousel.pause('access');accessOverlay.hidden=false;document.body.style.overflow='hidden';input.focus();}function closeAccess(){accessOverlay.hidden=true;carousel.resume('access');document.body.style.overflow='';}
       document.querySelectorAll('[data-open-access]').forEach(item=>item.addEventListener('click',openAccess));document.getElementById('access-close').addEventListener('click',closeAccess);accessOverlay.addEventListener('click',event=>{if(event.target===accessOverlay)closeAccess();});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!accessOverlay.hidden)closeAccess();});
+      document.getElementById('preview-intro-browse').addEventListener('click',()=>{dismissIntro();document.getElementById('top').scrollIntoView({behavior:'smooth'});});
+      document.getElementById('preview-intro-access').addEventListener('click',()=>{dismissIntro();document.getElementById('full-review').scrollIntoView({behavior:'smooth'});setTimeout(()=>document.getElementById('inline-access-word').focus(),550);});
+      document.getElementById('preview-intro-close').addEventListener('click',dismissIntro);
+      document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!previewIntro.hidden)dismissIntro();});
+      const introSound=document.getElementById('preview-intro-sound');
+      introSound.addEventListener('click',()=>{introFilm.pause();introFilm.currentTime=0;introFilm.muted=false;introFilm.loop=false;introFilm.play().then(()=>{introSound.textContent='Playing Tom.AI’s welcome…';}).catch(()=>{introFilm.muted=true;introFilm.play().catch(()=>{});introSound.textContent='Sound is blocked here. Tap again to retry ▶';});});
+      introFilm.addEventListener('ended',()=>{introFilm.muted=true;introFilm.currentTime=0;introFilm.loop=true;introFilm.play().catch(()=>{});introSound.textContent='Replay Tom.AI’s welcome ▶';});
+      const introCaptions=[
+        [0,4.96,'Hey, Linh. <em>Over here!</em>'],
+        [4.96,7.28,'Welcome to the <em>research studio.</em>'],
+        [7.28,9.88,'Tom and I built this<br>around <em>our conversation.</em>'],
+        [9.88,12.72,'And the U.S.<br><em>microdrama landscape.</em>'],
+        [12.72,14.88,'Your preview of the <em>sports slate.</em>'],
+        [14.88,20.48,'Enter the <em>access code</em><br>Tom sent you.'],
+        [20.48,22.72,'I’d start with <em>the Map.</em>'],
+        [22.72,26.9,'Major public U.S. microdrama moves<br>across <em>platforms and investment.</em>'],
+        [26.9,31,'And across <em>audiences and talent.</em>']
+      ];
+      const introCaption=document.getElementById('intro-caption');let captionIndex=-1;
+      function syncIntroCaption(){const index=introCaptions.findIndex(([start,end])=>introFilm.currentTime>=start&&introFilm.currentTime<end);if(index===captionIndex)return;captionIndex=index;introCaption.innerHTML=index<0?'':`<span>${introCaptions[index][2]}</span>`;}
+      introFilm.addEventListener('timeupdate',syncIntroCaption);introFilm.addEventListener('seeked',syncIntroCaption);syncIntroCaption();
       let guideMuted=false;
       function setGuideMuted(value){guideMuted=value;gateGuide.querySelector('video').muted=value;guidePanel.querySelector('video').muted=value;for(const id of ['gate-guide-audio','guide-audio-unlocked']){const control=document.getElementById(id);control.textContent=value?'Unmute':'Mute';control.setAttribute('aria-pressed',String(value));control.setAttribute('aria-label',`${value?'Unmute':'Mute'} Tom.AI`);}}
       function resetGuideVideo(video){video.pause();video.onended=null;video.muted=true;video.loop=false;const next=video.dataset.idleNext==='guiding'?'tom-ai-guiding-alpha-v1.webm':'tom-ai-listening-alpha-v1.webm';video.dataset.idleNext=next.includes('guiding')?'listening':'guiding';video.src=next;video.play().catch(()=>{});video.onended=()=>resetGuideVideo(video);}
@@ -199,12 +275,13 @@
       document.getElementById('gate-guide-audio').addEventListener('click',()=>setGuideMuted(!guideMuted));
       document.getElementById('guide-audio-unlocked').addEventListener('click',()=>setGuideMuted(!guideMuted));
       const guideMini=document.getElementById('gate-guide-mini');let guideMinimizedByUser=false;
-      function syncGuideMini(){if(!gateGuide.hidden||gate.hidden)return;guideMini.hidden=window.innerWidth<=620&&!guideMinimizedByUser&&window.scrollY<document.getElementById('preview').offsetTop-160;}
+      function syncGuideMini(){if(gate.hidden){guideMini.hidden=true;return;}guideMini.hidden=!guideMinimizedByUser;}
       document.getElementById('gate-guide-close').addEventListener('click',()=>{resetGuideVideo(gateGuide.querySelector('video'));guideMinimizedByUser=true;gateGuide.hidden=true;guideMini.hidden=false;});
       guideMini.addEventListener('click',()=>{gateGuide.hidden=false;guideMini.hidden=true;});
       document.getElementById('guide-nav').addEventListener('click',()=>{gateGuide.hidden=false;guideMini.hidden=true;});
       window.addEventListener('scroll',syncGuideMini,{passive:true});window.addEventListener('resize',syncGuideMini);syncGuideMini();
-      document.getElementById('back-to-slate').addEventListener('click',()=>{viewer.style.display='none';gate.hidden=false;gateGuide.hidden=true;guideMinimizedByUser=false;document.getElementById('gate-guide-mini').hidden=false;syncGuideMini();document.getElementById('top').scrollIntoView({behavior:'smooth'});});
+      previewIntro.hidden=false;document.body.style.overflow='hidden';carousel.pause('intro');introFilm.muted=false;introFilm.play().catch(()=>{introFilm.muted=true;introFilm.play().catch(()=>{});});
+      document.getElementById('back-to-slate').addEventListener('click',()=>{viewer.style.display='none';gate.hidden=false;gateGuide.hidden=false;guideMinimizedByUser=false;syncGuideMini();document.getElementById('top').scrollIntoView({behavior:'smooth'});});
       const fromBase64 = value => Uint8Array.from(atob(value), character => character.charCodeAt(0));
       async function tryOpen(word, vault) {
         const encoded = new TextEncoder().encode(word);
@@ -328,38 +405,43 @@
           stage.querySelector(`#${CSS.escape(id)}`)?.scrollIntoView({behavior:'smooth'});
         }
       }, true);
-      form.addEventListener('submit', async event => {
-        event.preventDefault();
-        const word = input.value;
+      async function unlockReview(sourceInput,sourceButton,sourceStatus) {
+        const word = sourceInput.value;
         if (!word) return;
-        button.disabled = true;
-        status.classList.remove('error');
-        status.textContent = 'Opening the review…';
+        sourceButton.disabled = true;
+        sourceStatus.classList.remove('error');
+        sourceStatus.textContent = 'Opening the review…';
         try {
           const response = await fetch('vault.json', {cache:'no-store'});
           if (!response.ok) throw new Error('Vault unavailable');
           bundle = await tryOpen(word, await response.json());
           if (!bundle) {
-            status.textContent = 'That word did not open the review. Please try again.';
-            status.classList.add('error');
-            input.select();
+            sourceStatus.textContent = 'That word did not open the review. Please try again.';
+            sourceStatus.classList.add('error');
+            sourceInput.select();
             return;
           }
-          input.value = '';
+          sourceInput.value = '';
           sessionWord = word;
           gate.hidden = true;
           accessOverlay.hidden = true;
+          previewIntro.hidden = true;
+          introFilm.pause();
           document.body.style.overflow = '';
           gateGuide.hidden = true;document.getElementById('gate-guide-mini').hidden=true;
           viewer.style.display = 'flex';
           guideLaunch.hidden = false;
+          guidePanel.hidden = false;
+          guideLaunch.setAttribute('aria-expanded','true');
           docButton.hidden = !(bundle.documents && bundle.documents.length);
-          showPage('strategy');
+          showPage('atlas');
         } catch (_) {
-          status.textContent = 'The review is temporarily unavailable. Please try again.';
-          status.classList.add('error');
-        } finally { button.disabled = false; }
-      });
+          sourceStatus.textContent = 'The review is temporarily unavailable. Please try again.';
+          sourceStatus.classList.add('error');
+        } finally { sourceButton.disabled = false; }
+      }
+      form.addEventListener('submit',event=>{event.preventDefault();unlockReview(input,button,status);});
+      document.getElementById('inline-access-form').addEventListener('submit',event=>{event.preventDefault();unlockReview(document.getElementById('inline-access-word'),document.getElementById('inline-open-button'),document.getElementById('inline-status'));});
       document.querySelectorAll('[data-page]').forEach(item => item.addEventListener('click', () => showPage(item.dataset.page)));
       docButton.addEventListener('click', () => {
         const documentFile = bundle?.documents?.[0];
@@ -381,7 +463,7 @@
         guideLaunch.setAttribute('aria-expanded', 'false');
         guideHistory.length = 0;
         guideMessages.querySelectorAll('.guide-message:not(:first-child)').forEach(node => node.remove());
-        viewer.style.display = 'none'; gate.hidden = false; gateGuide.hidden = true;guideMinimizedByUser=false;document.getElementById('gate-guide-mini').hidden=false;syncGuideMini(); accessOverlay.hidden = true; carousel.resume('access'); document.body.style.overflow = '';
+        viewer.style.display = 'none'; gate.hidden = false; gateGuide.hidden = false;guideMinimizedByUser=false;syncGuideMini(); accessOverlay.hidden = true; carousel.resume('access'); document.body.style.overflow = '';
         status.classList.remove('error'); status.textContent = 'Enter your access word to continue.';
         document.getElementById('top').scrollIntoView({behavior:'smooth'});
       });

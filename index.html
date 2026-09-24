@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="Opening Frame, a private working review.">
+  <meta name="description" content="Opening Frame, a working review for invited readers.">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <title>Opening Frame — Private review</title>
+  <title>Opening Frame — Working review</title>
   <style>
     :root{--ink:#0d171a;--paper:#ece9e2;--cream:#f6f2ea;--green:#b9e5a4;--muted:#a5aaa6;--line:rgba(245,247,237,.22)}
     *{box-sizing:border-box}
@@ -41,11 +41,11 @@
     .graphic{position:relative;min-height:535px;display:flex;align-items:center;justify-content:center;perspective:900px}
     .graphic:before{content:"";position:absolute;width:85%;aspect-ratio:1;border:1px solid rgba(202,226,201,.12);border-radius:50%;box-shadow:0 0 0 75px rgba(202,226,201,.025),0 0 0 150px rgba(202,226,201,.018)}
     .poster{width:min(42%,215px);height:390px;max-height:58vw;min-height:305px;border:1px solid #618072;position:absolute;overflow:hidden;box-shadow:0 34px 65px #02090988}
-    .poster:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 47% 28%,#718d75 0%,#223b3a 37%,#101919 80%)}
-    .poster:after{content:"";position:absolute;width:175%;height:47%;left:-42%;bottom:-18%;border-radius:50%;border:30px solid rgba(159,210,172,.13);transform:rotate(-23deg)}
+    .poster img{display:block;width:100%;height:100%;object-fit:cover}
+    .poster:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,14,15,.6),transparent 38%,rgba(7,14,15,.87))}
     .poster.one{transform:translateX(-113px) translateY(35px) rotate(-12deg);opacity:.6}
     .poster.two{transform:translateX(112px) translateY(29px) rotate(11deg);opacity:.72}
-    .poster.three{transform:translateY(-10px);background:#132326;z-index:2}
+    .poster.three{transform:translateY(-10px);z-index:2}
     .poster .postertext{position:absolute;z-index:3;inset:0;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
     .poster small{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#d9ece0}
     .poster strong{font-family:Georgia,serif;font-size:clamp(27px,3vw,46px);line-height:.99;letter-spacing:-.055em;font-weight:400}
@@ -67,7 +67,7 @@
 </head>
 <body>
   <main class="gate" id="gate">
-    <header class="top"><div class="logo">OPENING<span>FRAME</span></div><div class="topright">A private working review<br>September 2026</div></header>
+    <header class="top"><div class="logo">OPENING<span>FRAME</span></div><div class="topright">A working review for invited readers<br>September 2026</div></header>
     <div class="body">
       <div class="copy">
         <p class="eyebrow">An invitation to the next chapter</p>
@@ -76,10 +76,10 @@
         <form class="access" id="access-form">
           <label for="access-word">Your access word</label>
           <div class="access-row"><input id="access-word" name="access-word" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter access word" required><button type="submit" id="open-button">Enter the review <span aria-hidden="true">↗</span></button></div>
-          <p class="hint" id="status" role="status" aria-live="polite">Shared privately with invited readers.</p>
+          <p class="hint" id="status" role="status" aria-live="polite">Enter your access word to continue.</p>
         </form>
       </div>
-      <div class="graphic" aria-hidden="true"><div class="poster one"><div class="postertext"><small>Original series / concept</small><strong>Two sides.<br>One season.</strong><small>03 / 12</small></div></div><div class="poster two"><div class="postertext"><small>Athlete stories / concept</small><strong>After the<br>buzzer.</strong><small>02 / 12</small></div></div><div class="poster three"><div class="postertext"><small>Opening Frame / concept</small><strong>Who leaked<br>the offer?</strong><small>01 / 12</small></div></div><div class="issue">A strategy and research edition<br>Prepared for conversation</div></div>
+      <div class="graphic" aria-hidden="true"><div class="poster one"><img src="cover-transfer-clause.webp" alt=""><div class="postertext"><small>Original series / concept</small><strong>The Transfer<br>Clause</strong><small>02 / 03</small></div></div><div class="poster two"><img src="cover-captains-post.webp" alt=""><div class="postertext"><small>Original series / concept</small><strong>The Captain's<br>Post</strong><small>03 / 03</small></div></div><div class="poster three"><img src="cover-home-court.webp" alt=""><div class="postertext"><small>Opening Frame / concept</small><strong>Home<br>Court</strong><small>01 / 03</small></div></div><div class="issue">AI-generated fictional concept art<br>No athlete or production attached</div></div>
     </div>
     <footer class="bottom"><span>Opening Frame / Working concept</span><span>For invited review and response</span></footer>
   </main>
@@ -158,7 +158,7 @@
         if (!word) return;
         button.disabled = true;
         status.classList.remove('error');
-        status.textContent = 'Opening the private review…';
+        status.textContent = 'Opening the review…';
         try {
           const response = await fetch('vault.json', {cache:'no-store'});
           if (!response.ok) throw new Error('Vault unavailable');
@@ -195,7 +195,7 @@
         activeStyles.forEach(node => node.remove()); activeStyles = [];
         bundle = null;
         viewer.style.display = 'none'; gate.hidden = false;
-        status.classList.remove('error'); status.textContent = 'Shared privately with invited readers.';
+        status.classList.remove('error'); status.textContent = 'Enter your access word to continue.';
         input.focus();
       });
     })();
